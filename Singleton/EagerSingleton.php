@@ -12,7 +12,7 @@ namespace Singleton;
 * 3. Created object should be private so that it should be prevented from modification from outside.   
 *
 **/
-class ConnectDB {
+class ConnectDBEager {
     private $dbConnection;
     private static $host;
     private static $username;
@@ -21,23 +21,29 @@ class ConnectDB {
     private static $connect;
 
     /*****
-     * Lazy singleton
-     * benefits: Initialized when required
-     * Disadvantage: smetimes we need to start by default
+     * Eager singleton
+     * benefits: Static variables are automatically initialized
+     * Disadvantage: Sometimes it is not required but object takes memory spaces
+     * 
      */
+
+    private static function getInsstance() {
+        self::$connect = new self();
+    }
+
     private function __construct()
     {
         self::$host = 'localhost';
         self::$username = 'root';
-        self::$password = 'jkkjhjkh';
-        self::$db = 'kljlkjl';
+        self::$password = 'ioioi';
+        self::$db = 'kljkljlkl';
         $this->dbConnection = mysqli_connect(self::$host, self::$username, self::$password, self::$db) or Die('Unable to connect DB');
     }
 
     public static function connect() {
 
         if (is_null(self::$connect)) {
-            self::$connect = new self();
+            self::getInsstance();
         }    
         return self::$connect;
     }

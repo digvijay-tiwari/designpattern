@@ -5,8 +5,11 @@ namespace Singleton;
 *
 * Singleton Pattern
 * Only One object needs to be created throughout the project
-* Like DB connection
-* 
+*Required things:
+*
+* 1. Class should not be available for creating objects so private constructor is required
+* 2. Insstantiation should be done only with the help of method or function that too a static
+* 3. Created object should be private so that it should be prevented from modification from outside.   
 *
 **/
 class ConnectDB {

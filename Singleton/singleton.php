@@ -24,8 +24,8 @@ class ConnectDB {
     {
         self::$host = 'localhost';
         self::$username = 'root';
-        self::$password = 'abc';
-        self::$db = 'abc';
+        self::$password = 'jkljl';
+        self::$db = 'kkljkjkjlk';
         $this->dbConnection = mysqli_connect(self::$host, self::$username, self::$password, self::$db) or Die('Unable to connect DB');
     }
 
@@ -38,6 +38,4 @@ class ConnectDB {
     }
 }
 
-$db = ConnectDB::connect();
-print_r($db);
 

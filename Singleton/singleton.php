@@ -29,8 +29,8 @@ class ConnectDB {
     {
         self::$host = 'localhost';
         self::$username = 'root';
-        self::$password = 'jkkjhjkh';
-        self::$db = 'kljlkjl';
+        self::$password = 'password';
+        self::$db = 'ai';
         $this->dbConnection = mysqli_connect(self::$host, self::$username, self::$password, self::$db) or Die('Unable to connect DB');
     }
 

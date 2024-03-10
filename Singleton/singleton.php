@@ -1,6 +1,9 @@
 <?php
 
 namespace Singleton;
+
+use Exception;
+
 /*****
 *
 * Singleton Pattern
@@ -27,6 +30,9 @@ class ConnectDB {
      */
     private function __construct()
     {
+        /*if (!is_null(self::$connect) {
+            throw new Exception("Don't try to break it");
+        }*/
         self::$host = 'localhost';
         self::$username = 'root';
         self::$password = 'password';

@@ -10,20 +10,24 @@ require "singleton.php";
 use Singleton\ConnectDB;
 
 class CheckSingleton {
-    public $single;
-    public $eager;
+   // public $single;
+    //public $eager;
     public $reflection;
     public $instance2;
     public function __construct()
     {
+        $this->single = ConnectDB::connect();
+
         $this->reflection = new ReflectionClass('Singleton\ConnectDB');
         $constructor = $this->reflection->getConstructor();
-        $constructor->setAccessible(false);
+        $constructor->setAccessible(true);
         $this->instance2 = $this->reflection->newInstanceWithoutConstructor();
-        $this->single = ConnectDB::connect();
+
+
+        echo "Singleton Instance: " . spl_object_id($this->single) . "\n";
+        echo "Broken Singleton Instance: " . spl_object_id($this->instance2) . "\n";
 
     }
 }
 
 $chk = new CheckSingleton();
-print_r($chk);

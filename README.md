@@ -3,6 +3,7 @@
 **Singleton Pattern**
 
 The Singleton Pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to that instance. It is useful when you want to control access to a shared resource or ensure that only one instance of a class exists throughout the application's lifecycle.
+In this repository I have included Eager as well as Lazy Singleton with the example of Reflection api to break the singleton
 Required things:
 *
 * 1. The class should not be available for creating objects so a private constructor is required
@@ -36,4 +37,76 @@ class Singleton {
 
 $singletonInstance1 = Singleton::getInstance();
 $singletonInstance1->showMessage(); 
+
+
+**Factory Design Pattern**
+
+The Factory Design Pattern is a creational design pattern that provides an interface for creating objects in a superclass but allows subclasses to alter the type of objects that will be created. This pattern is useful when the type of object to be created is determined at runtime.
+
+Here's an example of how you can implement the Factory Design Pattern in PHP:
+
+// Abstract product class
+abstract class Vehicle {
+    abstract public function drive();
+}
+
+// Concrete product classes
+class Car extends Vehicle {
+    public function drive() {
+        return "Driving a car";
+    }
+}
+
+class Motorcycle extends Vehicle {
+    public function drive() {
+        return "Riding a motorcycle";
+    }
+}
+
+// Factory class
+class VehicleFactory {
+    public static function createVehicle($type) {
+        switch ($type) {
+            case 'car':
+                return new Car();
+            case 'motorcycle':
+                return new Motorcycle();
+            default:
+                throw new InvalidArgumentException("Invalid vehicle type.");
+        }
+    }
+}
+
+// Usage
+try {
+    $car = VehicleFactory::createVehicle('car');
+    echo $car->drive() . "\n";
+
+    $motorcycle = VehicleFactory::createVehicle('motorcycle');
+    echo $motorcycle->drive() . "\n";
+
+    // Attempting to create an invalid vehicle type
+    $invalid = VehicleFactory::createVehicle('bus');
+} catch (InvalidArgumentException $e) {
+    echo "Exception: " . $e->getMessage() . "\n";
+}
+
+
+In this example:
+
+Vehicle is an abstract class defining the interface for the products (Car and Motorcycle).
+Car and Motorcycle are concrete implementations of the Vehicle interface.
+VehicleFactory is a factory class responsible for creating instances of Car and Motorcycle based on the provided type.
+The createVehicle() method in the factory class takes a type parameter and returns an instance of the corresponding vehicle type.
+Usage demonstrates how to create instances of different vehicle types using the factory.
+The Factory Design Pattern allows you to encapsulate object creation logic, making your code more flexible and easier to maintain. It also promotes loose coupling between client code and the classes being instantiated.
+
+
+
+
+
+
+
+
+
 

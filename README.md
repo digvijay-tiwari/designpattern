@@ -1,7 +1,6 @@
 # designpattern
 
 **Singleton Pattern**
-
 The Singleton Pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to that instance. It is useful when you want to control access to a shared resource or ensure that only one instance of a class exists throughout the application's lifecycle.
 In this repository I have included Eager as well as Lazy Singleton with the example of Reflection api to break the singleton
 Required things:
@@ -11,6 +10,7 @@ Required things:
 * 3. The created object should be private so that it should be prevented from modification from outside.   
 
 e.g., 
+```
 
 class Singleton {
     // Private static variable to hold the instance of the class
@@ -37,14 +37,14 @@ class Singleton {
 
 $singletonInstance1 = Singleton::getInstance();
 $singletonInstance1->showMessage(); 
-
+```
 
 **Factory Design Pattern**
 
 The Factory Design Pattern is a creational design pattern that provides an interface for creating objects in a superclass but allows subclasses to alter the type of objects that will be created. This pattern is useful when the type of object to be created is determined at runtime.
 
 Here's an example of how you can implement the Factory Design Pattern in PHP:
-
+```
 // Abstract product class
 abstract class Vehicle {
     abstract public function drive();
@@ -90,7 +90,7 @@ try {
 } catch (InvalidArgumentException $e) {
     echo "Exception: " . $e->getMessage() . "\n";
 }
-
+```
 
 In this example:
 
@@ -117,7 +117,7 @@ Structure:
 Abstract Factory: Defines an interface for creating each product type.
 Concrete Factory: Implements the Abstract Factory and creates specific product objects.
 Product: Represents the individual product types.
-
+```
 // Abstract Factory
 interface ShapeFactory {
   public function createShape(string $type): Shape;
@@ -197,7 +197,7 @@ createAndDrawShape($consoleFactory, 'square');
 $svgFactory = new SVGShapeFactory();
 createAndDrawShape($svgFactory, 'circle');
 createAndDrawShape($svgFactory, 'square');
-
+```
 **Explanation**:
 
 The ShapeFactory interface defines createShape for creating different Shape objects.

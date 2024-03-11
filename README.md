@@ -107,7 +107,7 @@ The Factory Design Pattern allows you to encapsulate object creation logic, maki
 
 The Abstract Factory pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. It promotes loose coupling between the client code and the concrete classes that are instantiated.
 
-Benefits:
+**Benefits**:
 
 Flexibility: Enables you to switch between different product families easily by changing the concrete factory used.
 Decoupling: Client code doesn't depend on concrete product classes, promoting maintainability and extensibility.
@@ -117,6 +117,95 @@ Structure:
 Abstract Factory: Defines an interface for creating each product type.
 Concrete Factory: Implements the Abstract Factory and creates specific product objects.
 Product: Represents the individual product types.
+
+// Abstract Factory
+interface ShapeFactory {
+  public function createShape(string $type): Shape;
+}
+
+// Concrete Factory: ConsoleShapeFactory
+class ConsoleShapeFactory implements ShapeFactory {
+  public function createShape(string $type): Shape {
+    switch ($type) {
+      case 'circle':
+        return new ConsoleCircle();
+      case 'square':
+        return new ConsoleSquare();
+      default:
+        throw new InvalidArgumentException("Unsupported shape type: $type");
+    }
+  }
+}
+
+// Concrete Factory: SVGShapeFactory
+class SVGShapeFactory implements ShapeFactory {
+  public function createShape(string $type): Shape {
+    switch ($type) {
+      case 'circle':
+        return new SVGCircle();
+      case 'square':
+        return new SVGSquare();
+      default:
+        throw new InvalidArgumentException("Unsupported shape type: $type");
+    }
+  }
+}
+
+// Product: Shape (abstract)
+interface Shape {
+  public function draw(): void;
+}
+
+// Concrete Products: ConsoleCircle, ConsoleSquare, SVGCircle, SVGSquare
+class ConsoleCircle implements Shape {
+  public function draw(): void {
+    echo "Drawing circle on console\n";
+  }
+}
+
+class ConsoleSquare implements Shape {
+  public function draw(): void {
+    echo "Drawing square on console\n";
+  }
+}
+
+class SVGCircle implements Shape {
+  public function draw(): void {
+    echo "<circle ...></circle>\n"; // Generate SVG code for circle
+  }
+}
+
+class SVGSquare implements Shape {
+  public function draw(): void {
+    echo "<rect ...></rect>\n"; // Generate SVG code for square
+  }
+}
+
+// Usage
+
+function createAndDrawShape(ShapeFactory $factory, string $type): void {
+  $shape = $factory->createShape($type);
+  $shape->draw();
+}
+
+// Example usage with ConsoleShapeFactory
+$consoleFactory = new ConsoleShapeFactory();
+createAndDrawShape($consoleFactory, 'circle');
+createAndDrawShape($consoleFactory, 'square');
+
+// Example usage with SVGShapeFactory
+$svgFactory = new SVGShapeFactory();
+createAndDrawShape($svgFactory, 'circle');
+createAndDrawShape($svgFactory, 'square');
+
+**Explanation**:
+
+The ShapeFactory interface defines createShape for creating different Shape objects.
+ConsoleShapeFactory and SVGShapeFactory implement the ShapeFactory interface and create ConsoleCircle, ConsoleSquare, SVGCircle, and SVGSquare objects, respectively.
+The Shape interface defines the draw method for drawing shapes.
+Concrete shape classes (ConsoleCircle, ConsoleSquare, SVGCircle, SVGSquare) implement the drawing logic specific to their drawing type (console or SVG).
+The createAndDrawShape function takes a ShapeFactory instance and allows creation and drawing of shapes based on the chosen type and factory.
+By using the Abstract Factory pattern, you can easily switch between drawing shapes on the console or generating SVG code without modifying the client code that uses the createAndDrawShape function. This promotes loose coupling and simplifies switching between product families.
 
 
 
